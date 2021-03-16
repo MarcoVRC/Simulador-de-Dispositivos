@@ -1,0 +1,11 @@
+tipo de dispositivo, numero de telefono, dispositivo asociado, correo electronico, nombre de dispositivo, visible
+computadora portatil,,,correo01@correo.com,cp_01,si
+tablet,,,correo01@correo.com,t_01,si
+smartphone,5555-0001,,correo01@correo.com,s_01,si
+smartwatch,,,correo01@correo.com,sw_01,si
+auriculares,,sw_01,correo01@correo.com,a_01,si
+computadora portatil,,,correo02@correo.com,cp_02,si
+tablet,,,correo02@correo.com,t_02,si
+smartphone,5555-0002,,correo02@correo.com,s_02,si
+smartwatch,,,correo02@correo.com,sw_02,si
+auriculares,,cp_02,correo02@correo.com,a_02,si
