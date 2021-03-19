@@ -42,19 +42,18 @@ public class MenuCrear {
 		case "1":
                     ManejoComputadoraPortatil.getInstancia().crearDispositivo();	
                         break;
-                
-                        case "2":
-                            ManejoTablet.getInstancia().crearDispositivo();
-                                break;
-                                    case"3":
-                            
-                                        break;
-                                        case"4":
-                                            ManejoSmartPhone.getInstancia().crearDispositivo();
-                                                break;
-                                                case"5":
-                                                    
-                                                    break;
+                case "2":
+                    ManejoTablet.getInstancia().crearDispositivo();
+                    break;
+                case"3":
+                    
+                    break;
+                case"4":
+                    ManejoSmartPhone.getInstancia().crearDispositivo();
+                    break;
+                case"5":
+                    
+                    break;
 		}
 		}while (!opcion.toLowerCase().equals("salir"));
         }catch(IOException e){}
