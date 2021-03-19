@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author RC
  */
-public class ManejoTablet {
+public class ManejoTablet extends ManejoDispositivo{
     private static ManejoTablet instancia;
     private ManejoTablet()
     {
@@ -29,42 +29,31 @@ public class ManejoTablet {
     private ArrayList<Tablet> tablets = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
     private int Id=1;
-    public void crearDispositivo()
+    
+    public void crearTablet()
     {
-       Tablet tablet = new Tablet();
-        System.out.println("Correo Electronico : ");
-        String correo = sc.nextLine();
-        System.out.println("Nombre del Dispositivo : ");
-        String nombre = sc.nextLine();
-        
-        System.out.println("Visible Para Conexion : ");
-        String visible = sc.nextLine();
-        System.out.println(" Nota: El dispositivo esta encendido por defecto. " + "\n");
-        String encendido = "SI";
-        
-        tablet.setIdDispositivo(Id);
-        tablet.setCorreoElectronico(correo);
-        tablet.setNombreDelDispositivo(nombre);
-        tablet.setEncendido(encendido);
-        tablet.setVisibilidad(visible);
-        tablets.add(tablet);
-        Id++;
+        Dispositivo d = crearDispositivo();
+        Tablet tablet = new Tablet();
+        tablet.setIdDispositivo(d.getIdDispositivo());
+        tablet.setCorreoElectronico(d.getCorreoElectronico());
+        tablet.setNombreDelDispositivo(d.getNombreDelDispositivo());
+        tablet.setVisibilidad(d.getVisibilidad());
+        tablet.setEncendido(d.getEncendido());
+           tablets.add(tablet);
     }
     
-    public void mostrar()
-    {
-        
-        for(Tablet d: tablets)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("TIPO DE DISPOSITIVO: " + d.getTipoDeDispositivo()+"\n");
-            System.out.println("ENCENDIDO : " + d.getEncendido()+"\n");
-            System.out.println("VISIBLE A LOS DEMAS : " + d.getVisibilidad());
-            System.out.println("--------------------------------------------------------------------");
-        }
+    public void administrarTablet(){
+        Tablet tablet = new Tablet();
+       
+       ArrayList<Dispositivo> myArrayList = castArrayList(tablets);
+       administrarDispositivo(myArrayList, tablet.getTipoDeDispositivo());
+    }	
     
+    public static <Dispositivo, Tablet> ArrayList<Dispositivo> castArrayList(ArrayList<Tablet> list){
+    ArrayList<Dispositivo> newlyCastedArrayList = new ArrayList<Dispositivo>();
+    for(Tablet listObject : list){
+        newlyCastedArrayList.add((Dispositivo)listObject);
+    }
+    return newlyCastedArrayList;
     }
 }
