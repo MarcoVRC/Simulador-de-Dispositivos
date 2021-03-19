@@ -41,62 +41,23 @@ public class MenuAdministrar {
 	
 	switch(opcion){
 		case "1":
-                 //   ManejoComputadoraPortatil.getInstancia().crearDispositivo();	
-                        break;
+                ManejoComputadoraPortatil.getInstancia().administrarPortatil();
+                    break;
                 
-                        case "2":
-                     //       ManejoTablet.getInstancia().crearDispositivo();
-                                break;
-                                    case"3":
-                            
-                                        break;
-                                        case"4":
-                             //               ManejoSmartPhone.getInstancia().crearDispositivo();
-                                                break;
-                                                case"5":
-                                                    
-                                                    break;
+                case "2":
+                ManejoTablet.getInstancia().administrarTablet();
+                    break;
+                case"3":
+                    
+                    break;
+                case"4":
+                     ManejoSmartPhone.getInstancia().administrarSmartPhone();
+                    break;
+                case"5":
+                    
+                    break;
 		}
 		}while (!opcion.toLowerCase().equals("salir"));
         }catch(IOException e){}
 	}
-        
-        public void administrarPC()
-        {
-        try{   
-            String opcion = "";
-            do{
-                System.out.println(" "); 
-                System.out.println("       "+"-----ADMINISTRAR DISPOSITIVOS-----");
-                System.out.println("");
-                System.out.println("1. Computadora Portatil ");
-                System.out.println("2. Tablet");
-                System.out.println("3. SmartWatch");
-                System.out.println("4. SmartPhone");
-                System.out.println("5. Auriculares Inalambricos");
-                System.out.println("   "+"Escriba Salir Si Lo Desea");
-
-                opcion=dato.readLine();
-
-                switch(opcion){
-                        case "1":
-                         	
-                            break;
-                        case "2":
-                            
-                            break;
-                        case"3":
-                            
-                            break;
-                        case"4":
-                                    
-                            break;
-                        case"5":
-                            
-                            break;
-                        }
-                        }while (!opcion.toLowerCase().equals("salir"));
-        }catch(IOException e){} 
-            
-        }
 }
