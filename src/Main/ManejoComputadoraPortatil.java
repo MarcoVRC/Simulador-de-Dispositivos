@@ -5,8 +5,12 @@
  */
 package Main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
+
+
 
 /**
  *
@@ -14,10 +18,10 @@ import java.util.Scanner;
 
  * @author RC
  */
-public class ManejoComputadoraPortatil{
+public class ManejoComputadoraPortatil extends ManejoDispositivo{
   //  private String tipoDeDispositivo;
     private static ManejoComputadoraPortatil instancia;
-    private ManejoComputadoraPortatil()
+    public  ManejoComputadoraPortatil()
     {
     }
     
@@ -29,75 +33,62 @@ public class ManejoComputadoraPortatil{
         }
         return instancia;
     }
-    private ArrayList<Portatil> dispositivos = new ArrayList<>();
-    private Scanner sc = new Scanner(System.in);
-    private int Id=1;
-    public void crearDispositivo()
-    {
-       Portatil pc = new Portatil();
-        System.out.println("Correo Electronico : ");
-        String correo = sc.nextLine();
-        System.out.println("Nombre del Dispositivo : ");
-        String nombre = sc.nextLine();
-        
-        System.out.println("Visible Para Conexion : ");
-        String visible = sc.nextLine();
-        System.out.println(" Nota: El dispositivo esta encendido por defecto. " + "\n");
-        String encendido = "SI";
-        
-        pc.setIdDispositivo(Id);
-        pc.setCorreoElectronico(correo);
-        pc.setNombreDelDispositivo(nombre);
-        pc.setEncendido(encendido);
-        pc.setVisibilidad(visible);
-        dispositivos.add(pc);
-        Id++;
+     
+    private ArrayList<Portatil> portatiles = new ArrayList<>();
+    private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    public String encendido = "SI";
+    
+    public void crearPortatil()
+    {   
+   
+     Dispositivo d = crearDispositivo();
+     Portatil p = new Portatil();
+     p.setIdDispositivo(d.getIdDispositivo());
+     p.setCorreoElectronico(d.getCorreoElectronico());
+     p.setNombreDelDispositivo(d.getNombreDelDispositivo());
+     p.setVisibilidad(d.getVisibilidad());
+     p.setEncendido(d.getEncendido());
+        portatiles.add(p);
     }
     
-    public void mostrar()
+    public void tomarFoto()
     {
-        
-        for(Portatil d: dispositivos)
+        for(Portatil d: portatiles)
         {
-            System.out.println("--------------------------------------------------------------------");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("ID : " + d.getIdDispositivo()+"\n");
             System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
             System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("TIPO DE DISPOSITIVO: " + d.getTipoDeDispositivo()+"\n");
-            System.out.println("ENCENDIDO : " + d.getEncendido()+"\n");
-            System.out.println("VISIBLE A LOS DEMAS : " + d.getVisibilidad());
             System.out.println("--------------------------------------------------------------------");
-            System.out.println("--------------------------------------------------------------------");
+            
         }
-    
-    }
-    
-    public void modificar(int id)
-    {
-        int opcion=0;
-        for(Portatil p: dispositivos)
+         System.out.println("Selecciona el dispositivo tomar una fotografia.: ");
+        try{
+        int id = Integer.parseInt(bf.readLine());
+        for(Portatil p: portatiles)
         {
-            if(p.getIdDispositivo() == id)
+            if(id == p.getIdDispositivo())
             {
-                System.out.println("");
-                switch(opcion)
-                {
-                    case 1:
-                        
-                         break;
-                    case 2:
-                        
-                        break;
-                    case 3:
-                        
-                        break;
-                    case 4:
-                        
-                        break;
-                
-                }
+                tomarFoto(p.getCorreoElectronico());
+                 
             }
         }
+        }catch(IOException e){}
     }
+    
+    public void administrarPortatil(){
+        Portatil p = new Portatil();
+       
+        ArrayList<Dispositivo> myArrayList = castArrayList(portatiles);
+        administrarDispositivo(myArrayList, p.getTipoDeDispositivo());
+    }	
+    
+    public static <Dispositivo, Portatil> ArrayList<Dispositivo> castArrayList(ArrayList<Portatil> list){
+    ArrayList<Dispositivo> newlyCastedArrayList = new ArrayList<Dispositivo>();
+    for(Portatil listObject : list){
+        newlyCastedArrayList.add((Dispositivo)listObject);
+    }
+    return newlyCastedArrayList;
+}
+    
 }
