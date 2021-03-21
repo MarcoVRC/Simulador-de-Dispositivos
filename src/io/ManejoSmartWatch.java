@@ -6,6 +6,7 @@
 package io;
 
 import bean.Dispositivo;
+import bean.Foto;
 import bean.SmartWatch;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -79,13 +80,44 @@ public class ManejoSmartWatch extends ManejoDispositivo{
         {
             if(id == p.getIdDispositivo())
             {
-                tomarFoto(p.getCorreoElectronico(), p.getTipoDeDispositivo(), p.getNombreDelDispositivo());
+                tomarFoto(p.getCorreoElectronico(), p.getTipoDeDispositivo(), p.getNombreDelDispositivo(), p.getIdDispositivo());
                  
             }
         }
         }catch(IOException e){}
     }
-    
+        
+    public void mostrarFotoReloj()
+    {
+       for(SmartWatch d: arrayRelojes)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+            
+        }
+        System.out.println("Selecciona el dispositivo para ingresar a su galeria: ");
+        try{
+        int id = Integer.parseInt(bf.readLine());
+        for(SmartWatch p: arrayRelojes)
+        {
+            if(p.getIdDispositivo() == id)
+            {
+                for(Foto f: arrayFotos)
+                {
+                    if(f.getIdDispositivo() == id )
+                    {
+                        System.out.println("Tipo de Dispositivo : " + f.getTipoDispositivo());
+                        System.out.println("Capturado desde: " + f.getNombreDispositivo());
+                        System.out.println("Nombre de Foto : " + f.getNombreFoto());
+                    }
+                }
+            }
+        }
+        }catch(IOException e){}
+    }    
     public void administrarSmartWatch(){
         SmartWatch reloj = new SmartWatch();
        
