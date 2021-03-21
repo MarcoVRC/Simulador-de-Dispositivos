@@ -5,6 +5,7 @@
  */
 package io;
 
+import bean.Foto;
 import bean.SmartPhone;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,8 +71,7 @@ public class ManejoSmartPhone extends ManejoDispositivo{
     }
     
      public void cargarPhone(String numero, String correo, String nombre, String visible)
-   {
-     //int n = Integer.parseInt(numero);  
+   {  
     SmartPhone phone1 = new SmartPhone();
     phone1.setIdDispositivo(Id);
     phone1.setNumero(numero);
@@ -81,8 +81,6 @@ public class ManejoSmartPhone extends ManejoDispositivo{
     phone1.setEncendido(encendido);
          arrayTelefonos.add(phone1);
          Id++;
-      // System.out.println(correo + nombre + visible);
-       // mostrar();
    }
     
     public void administrarSmartPhone(){
@@ -227,7 +225,7 @@ public class ManejoSmartPhone extends ManejoDispositivo{
         }catch(IOException e){ System.out.println("Entrada invalida!"); }
     }	
     
-     public void capturarFotoPhone() //throws NumberFormatException
+    public void capturarFotoPhone() 
     {
         for(SmartPhone d: arrayTelefonos)
         {
@@ -247,7 +245,7 @@ public class ManejoSmartPhone extends ManejoDispositivo{
         {
             if(id == p.getIdDispositivo())
             {
-                tomarFoto(p.getCorreoElectronico(), p.getTipoDeDispositivo(), p.getNombreDelDispositivo());
+                tomarFoto(p.getCorreoElectronico(), p.getTipoDeDispositivo(), p.getNombreDelDispositivo(), p.getIdDispositivo());
                  
             }
         }
@@ -255,9 +253,93 @@ public class ManejoSmartPhone extends ManejoDispositivo{
         }catch(IOException e){}
     }
     
+    public void mostrarFotoPhone()
+    {
+       for(SmartPhone d: arrayTelefonos)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+            
+        }
+        System.out.println("Selecciona el dispositivo para ingresar a su galeria: ");
+        try{
+        int id = Integer.parseInt(bf.readLine());
+        for(SmartPhone p: arrayTelefonos)
+        {
+            if(p.getIdDispositivo() == id)
+            {
+                for(Foto f: arrayFotos)
+                {
+                    if(f.getIdDispositivo() == id )
+                    {
+                    System.out.println("Tipo de Dispositivo : " + f.getTipoDispositivo());
+                    System.out.println("Capturado desde: " + f.getNombreDispositivo());
+                    System.out.println("Nombre de Foto : " + f.getNombreFoto());
+                    //System.out.println("Nombre de Foto : " + f.getIdDispositivo());
+                    }
+                }
+            }
+        }
+        }catch(IOException e){}
+    }
+    
+    public void copiarTextoPhone()
+     {
+        for(SmartPhone d: arrayTelefonos)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+            
+        }
+         System.out.println("Selecciona el dispositivo que va a copiar el texto: ");
+        try{
+            try{
+        int id = Integer.parseInt(bf.readLine());
+           
+        for(SmartPhone p: arrayTelefonos)
+        {
+            if(id == p.getIdDispositivo() && p.getEncendido().equals("SI"))
+            {
+                copiarTexto(p.getIdDispositivo(),p.getNombreDelDispositivo());    
+            }
+        }
+         }catch(NumberFormatException ex){}
+        }catch(IOException e){}
+     }
+    
+    public void pegarTextoPhone()
+    {
+        for(SmartPhone d: arrayTelefonos)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+        }
+        System.out.println("Selecciona el dispositivo en el que vas pegar el texto: ");
+        try{
+            try{
+                int id = Integer.parseInt(bf.readLine());
+                for(SmartPhone p: arrayTelefonos)
+                {
+                    if(id == p.getIdDispositivo() && p.getVisibilidad().equalsIgnoreCase("SI") && p.getEncendido().equals("SI"))
+                    {
+                        pegarTexto();
+                    }
+                }
+            }catch(NumberFormatException ex){}
+        }catch(IOException e){}
+    }
+     
     public Boolean verificar(String correo)
     {
-        boolean apagado=false;
         for(SmartPhone s: arrayTelefonos)
         {
             if(s.getCorreoElectronico().equals(correo) & s.getEncendido().equals("SI"))
