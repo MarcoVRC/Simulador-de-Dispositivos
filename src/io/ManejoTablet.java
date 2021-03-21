@@ -6,6 +6,7 @@
 package io;
 
 import bean.Dispositivo;
+import bean.Foto;
 import bean.Tablet;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -83,13 +84,96 @@ public class ManejoTablet extends ManejoDispositivo{
         {
             if(id == p.getIdDispositivo())
             {
-                tomarFoto(p.getCorreoElectronico(), p.getTipoDeDispositivo(), p.getNombreDelDispositivo());
+                tomarFoto(p.getCorreoElectronico(), p.getTipoDeDispositivo(), p.getNombreDelDispositivo(), p.getIdDispositivo());
                  
             }
         }
         }catch(IOException e){}
     }
     
+    public void mostrarFotoTablet()
+    {
+       for(Tablet d: arrayTablets)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+            
+        }
+        System.out.println("Selecciona el dispositivo para ingresar a su galeria: ");
+        try{
+        int id = Integer.parseInt(bf.readLine());
+        for(Tablet p: arrayTablets)
+        {
+            if(p.getIdDispositivo() == id)
+            {
+                for(Foto f: arrayFotos)
+                {
+                    if(f.getIdDispositivo() == id )
+                    {
+                        System.out.println("Tipo de Dispositivo : " + f.getTipoDispositivo());
+                        System.out.println("Capturado desde: " + f.getNombreDispositivo());
+                        System.out.println("Nombre de Foto : " + f.getNombreFoto());
+                    }
+                }
+            }
+        }
+        }catch(IOException e){}
+    }
+    
+    public void copiarTextoTablet()
+     {
+        for(Tablet d: arrayTablets)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+            
+        }
+         System.out.println("Selecciona el dispositivo que va a copiar el texto: ");
+        try{
+            try{
+        int id = Integer.parseInt(bf.readLine());
+           
+        for(Tablet p: arrayTablets)
+        {
+            if(id == p.getIdDispositivo() && p.getEncendido().equals("SI"))
+            {
+                copiarTexto(p.getIdDispositivo(),p.getNombreDelDispositivo());    
+            }
+        }
+         }catch(NumberFormatException ex){}
+        }catch(IOException e){}
+     }
+    
+    public void pegarTextoTablet()
+    {
+        for(Tablet d: arrayTablets)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+        }
+        System.out.println("Selecciona el dispositivo en el que vas pegar el texto: ");
+        try{
+            try{
+                int id = Integer.parseInt(bf.readLine());
+                for(Tablet p: arrayTablets)
+                {
+                    if(id == p.getIdDispositivo() && p.getVisibilidad().equalsIgnoreCase("SI") && p.getEncendido().equals("SI"))
+                    {
+                        pegarTexto();
+                    }
+                }
+            }catch(NumberFormatException ex){}
+        }catch(IOException e){}
+    }
     public void administrarTablet(){
         Tablet tablet = new Tablet();
        
