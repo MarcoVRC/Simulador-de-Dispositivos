@@ -6,6 +6,7 @@
 package io;
 
 import bean.Dispositivo;
+import bean.Foto;
 import bean.Portatil;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * @author RC
  */
 public class ManejoComputadoraPortatil extends ManejoDispositivo{
-  //  private String tipoDeDispositivo;
+
     private static ManejoComputadoraPortatil instancia;
     private ArrayList<Portatil> arrayPortatiles = new ArrayList<>();
     private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -91,10 +92,94 @@ public class ManejoComputadoraPortatil extends ManejoDispositivo{
         {
             if(id == p.getIdDispositivo())
             {
-                tomarFoto(p.getCorreoElectronico(), p.getTipoDeDispositivo(), p.getNombreDelDispositivo());
+                tomarFoto(p.getCorreoElectronico(), p.getTipoDeDispositivo(), p.getNombreDelDispositivo(), p.getIdDispositivo());
                  
             }
         }
+        }catch(IOException e){}
+    }
+    
+    public void mostrarFotoPortatil()
+    {
+       for(Portatil d: arrayPortatiles)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+            
+        }
+        System.out.println("Selecciona el dispositivo para ingresar a su galeria: ");
+        try{
+        int id = Integer.parseInt(bf.readLine());
+        for(Portatil p: arrayPortatiles)
+        {
+            if(p.getIdDispositivo() == id)
+            {
+                for(Foto f: arrayFotos)
+                {
+                    if(f.getIdDispositivo() == id )
+                    {
+                    System.out.println("Tipo de Dispositivo : " + f.getTipoDispositivo());
+                    System.out.println("Capturado desde: " + f.getNombreDispositivo());
+                    System.out.println("Nombre de Foto : " + f.getNombreFoto());
+                    }
+                }
+            }
+        }
+        }catch(IOException e){}
+    }
+    
+    public void copiarTextoPortatil()
+     {
+        for(Portatil d: arrayPortatiles)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+            
+        }
+         System.out.println("Selecciona el dispositivo que va a copiar el texto: ");
+        try{
+            try{
+        int id = Integer.parseInt(bf.readLine());
+           
+        for(Portatil p: arrayPortatiles)
+        {
+            if(id == p.getIdDispositivo() && p.getEncendido().equals("SI"))
+            {
+                copiarTexto(p.getIdDispositivo(),p.getNombreDelDispositivo());    
+            }
+        }
+         }catch(NumberFormatException ex){}
+        }catch(IOException e){}
+     }
+    
+    public void pegarTextoPortatil()
+    {
+        for(Portatil d: arrayPortatiles)
+        {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("ID : " + d.getIdDispositivo()+"\n");
+            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+            System.out.println("--------------------------------------------------------------------");
+        }
+        System.out.println("Selecciona el dispositivo en el que vas pegar el texto: ");
+        try{
+            try{
+                int id = Integer.parseInt(bf.readLine());
+                for(Portatil p: arrayPortatiles)
+                {
+                    if(id == p.getIdDispositivo() && p.getVisibilidad().equalsIgnoreCase("SI") && p.getEncendido().equals("SI"))
+                    {
+                        pegarTexto();
+                    }
+                }
+            }catch(NumberFormatException ex){}
         }catch(IOException e){}
     }
     
