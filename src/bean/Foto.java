@@ -10,10 +10,20 @@ package bean;
  * @author RC
  */
 public class Foto {
+    private int idFoto;
     private String nombreFoto;
     private String tipoDispositivo;
     private String nombreDispositivo;
     private int idDispositivo;
+
+    public int getIdFoto() {
+        return idFoto;
+    }
+
+    public void setIdFoto(int idFoto) {
+        this.idFoto = idFoto;
+    }
+    
     
     public String getNombreFoto() {
         return nombreFoto;
