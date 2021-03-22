@@ -6,6 +6,7 @@
 package io;
 
 import bean.Dispositivo;
+import bean.Documento;
 import bean.Foto;
 import bean.Portatil;
 import java.io.BufferedReader;
@@ -70,11 +71,9 @@ public class ManejoComputadoraPortatil extends ManejoDispositivo{
     portatil1.setEncendido(encendido);
          arrayPortatiles.add(portatil1);
          id++;
-      // System.out.println(correo /*+ nombre + visible*/);
-        //mostrar();
    }
     
-    public void capturarFotoPortatil()
+    public void mostrarLista()
     {
         for(Portatil d: arrayPortatiles)
         {
@@ -83,9 +82,28 @@ public class ManejoComputadoraPortatil extends ManejoDispositivo{
             System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
             System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
             System.out.println("--------------------------------------------------------------------");
-            
         }
-         System.out.println("Selecciona el dispositivo tomar una fotografia.: ");
+    }
+    
+    public void mostrarListaVisibles()
+    {
+        for(Portatil d: arrayPortatiles)
+        {
+            if(d.getVisibilidad().equals("SI"))
+            {
+                System.out.println("--------------------------------------------------------------------");
+                System.out.println("ID : " + d.getIdDispositivo()+"\n");
+                System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+                System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+                System.out.println("--------------------------------------------------------------------");
+            }
+        }
+    }
+    
+    public void capturarFotoPortatil()
+    {
+        mostrarLista();
+        System.out.println("Selecciona el dispositivo tomar una fotografia.: ");
         try{
         int id = Integer.parseInt(bf.readLine());
         for(Portatil p: arrayPortatiles)
@@ -101,15 +119,7 @@ public class ManejoComputadoraPortatil extends ManejoDispositivo{
     
     public void mostrarFotoPortatil()
     {
-       for(Portatil d: arrayPortatiles)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-            
-        }
+        mostrarLista();
         System.out.println("Selecciona el dispositivo para ingresar a su galeria: ");
         try{
         int id = Integer.parseInt(bf.readLine());
@@ -133,15 +143,7 @@ public class ManejoComputadoraPortatil extends ManejoDispositivo{
     
     public void copiarTextoPortatil()
      {
-        for(Portatil d: arrayPortatiles)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-            
-        }
+         mostrarLista();
          System.out.println("Selecciona el dispositivo que va a copiar el texto: ");
         try{
             try{
@@ -160,14 +162,7 @@ public class ManejoComputadoraPortatil extends ManejoDispositivo{
     
     public void pegarTextoPortatil()
     {
-        for(Portatil d: arrayPortatiles)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-        }
+        mostrarLista();
         System.out.println("Selecciona el dispositivo en el que vas pegar el texto: ");
         try{
             try{
@@ -182,6 +177,66 @@ public class ManejoComputadoraPortatil extends ManejoDispositivo{
             }catch(NumberFormatException ex){}
         }catch(IOException e){}
     }
+    
+    public void compartirDocumentoPortatil()
+    {
+        try{
+        System.out.println("Escribe el nombre del documento que vas a compartir : ");
+        String nombreDocumento = bf.readLine();
+        
+        mostrarListaVisibles();
+        System.out.println("Selecciona el dispositivo al que se le va a compartir el documento.: ");
+        int idDestino = Integer.parseInt(bf.readLine());
+        
+        System.out.println("Selecciona el dispositivo que va a compartir el documento : ");
+        mostrarListaVisibles();
+        int idOrigen = Integer.parseInt(bf.readLine());
+        
+        for(Portatil p: arrayPortatiles)
+        {
+            if(idOrigen == p.getIdDispositivo())
+            {
+                for(Portatil p1: arrayPortatiles)
+                {
+                    if(idDestino == p1.getIdDispositivo())
+                    {
+                        crearDocumento(p.getNombreDelDispositivo(), p1.getNombreDelDispositivo(),
+                                p.getIdDispositivo(), nombreDocumento);
+                    }
+                }
+            }
+        }
+        /*******/
+        }catch(IOException e){}
+        
+    }
+    
+     public void mostrarDocumentosPortatil()
+    {
+        mostrarLista();
+        System.out.println("Selecciona el dispositivo para ingresar a sus documentos compartidos : ");
+        try{
+        int id = Integer.parseInt(bf.readLine());
+        for(Portatil p: arrayPortatiles)
+        {
+            if(p.getIdDispositivo() == id)
+            {
+                for(Documento f: arrayDocumentos)
+                {
+                    if(f.getIdDispositivo() == id )
+                    {
+                        System.out.println("***************************************************************");
+                        System.out.println("Nombre del documento : " + f.getNombreDocumento());
+                        System.out.println("Compartido desde: " + f.getnombreDispositivoOrigen());
+                        System.out.println("Dispositivo Actual : " + f.getNombreDispositivoDestino());
+                        System.out.println("***************************************************************");
+                    }
+                }
+            }
+        }
+        }catch(IOException e){}
+        
+    } 
     
     public void administrarPortatil(){
         Portatil p = new Portatil();
