@@ -3,17 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/Tablet.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/ManejoTablet.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/ManejoSmartPhone.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/MenuCrear.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/Dispositivo.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/MenuAdministrar.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/Portatil.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/MenuPrincipal.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/Main.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/ManejoComputadoraPortatil.java</file>
-            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Practica1/src/Main/SmartPhone.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/ManejoSmartWatch.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/MenuAcciones.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/ManejoSmartPhone.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/ManejoComputadoraPortatil.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/MenuPrincipal.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/ManejoArchivo.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/ManejoTablet.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/MenuAdministrar.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/io/ManejoDispositivo.java</file>
+            <file>file:/C:/Users/RC/Documents/NetBeansProjects/Simulador-de-Dispositivos/src/procesador/Procesador.java</file>
         </group>
     </open-files>
 </project-private>
