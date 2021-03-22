@@ -52,7 +52,7 @@ public class MenuCrear {
                     ManejoSmartPhone.getInstancia().crearDispositivo();
                     break;
                 case"5":
-                    
+                 
                     break;
 		}
 		}while (!opcion.toLowerCase().equals("salir"));

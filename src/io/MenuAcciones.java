@@ -93,13 +93,13 @@ public class MenuAcciones {
                     break;
                 
                 case "2":
-                ManejoComputadoraPortatil.getInstancia().copiarTextoPortatil();
+                    ManejoComputadoraPortatil.getInstancia().copiarTextoPortatil();
                     break;
                 case"3":
-                ManejoComputadoraPortatil.getInstancia().pegarTextoPortatil();    
+                    ManejoComputadoraPortatil.getInstancia().pegarTextoPortatil();    
                     break;
                 case"4":
-                   
+                    ManejoComputadoraPortatil.getInstancia().compartirDocumentoPortatil();
                     break;
                 case"5":
                     
@@ -143,7 +143,7 @@ public class MenuAcciones {
                     ManejoTablet.getInstancia().pegarTextoTablet();
                     break;
                 case"4":
-                   
+                    ManejoTablet.getInstancia().compartirDocumentoTablet();
                     break;
                 case"5":
                     
@@ -230,7 +230,7 @@ public class MenuAcciones {
                     
                     break;
                 case"4":
-                    
+                ManejoSmartPhone.getInstancia().compartirDocumentoPhone();    
                     break;
                 case"5":
                     
@@ -290,7 +290,7 @@ public class MenuAcciones {
                 String opcion = "";
                 do{
                     System.out.println(" "); 
-                    System.out.println("       "+"-----ACCIONES HECHAS POR DISPOSITIVOS-----");
+                    System.out.println("       "+"-----ACCIONES HECHAS POR PORTATILES-----");
                     System.out.println("");
                     System.out.println("1. Galeria ");
                     System.out.println("2. Textos Copiados");
@@ -304,12 +304,13 @@ public class MenuAcciones {
                             ManejoComputadoraPortatil.getInstancia().mostrarFotoPortatil();
                             break;
                         case "2":
+                            ManejoDispositivo.getInstancia().mostrarTextosCopiados();
                             break;
                         case"3":
-                    
+                            ManejoComputadoraPortatil.getInstancia().pegarTextoPortatil();
                             break;
                         case"4":
-                
+                            ManejoComputadoraPortatil.getInstancia().compartirDocumentoPortatil();
                             break;
                         case"5":
                     
@@ -328,7 +329,7 @@ public class MenuAcciones {
                 String opcion = "";
                 do{
                     System.out.println(" "); 
-                    System.out.println("       "+"-----ACCIONES HECHAS POR DISPOSITIVOS-----");
+                    System.out.println("       "+"-----ACCIONES HECHAS POR TABLETS-----");
                     System.out.println("");
                     System.out.println("1. Galeria ");
                     System.out.println("2. Textos Copiados");
@@ -342,12 +343,13 @@ public class MenuAcciones {
                             ManejoTablet.getInstancia().mostrarFotoTablet();
                             break;
                         case "2":
+                            ManejoDispositivo.getInstancia().mostrarTextosCopiados();
                             break;
                         case"3":
-                    
+                            ManejoTablet.getInstancia().pegarTextoTablet();
                             break;
                         case"4":
-                
+                            ManejoTablet.getInstancia().compartirDocumentoTablet();
                             break;
                         case"5":
                     
@@ -367,29 +369,14 @@ public class MenuAcciones {
                 String opcion = "";
                 do{
                     System.out.println(" "); 
-                    System.out.println("       "+"-----ACCIONES HECHAS POR DISPOSITIVOS-----");
+                    System.out.println("       "+"-----ACCIONES HECHAS POR SMARTWATCH-----");
                     System.out.println("");
                     System.out.println("1. Galeria ");
-                    System.out.println("2. Textos Copiados");
-                    System.out.println("3. Pegar Texto");
-                    System.out.println("4. Documentos Compartidos");
-                    System.out.println("5. ");
                     System.out.println("   "+"Escriba Salir Si Lo Desea");
                     opcion=dato.readLine();
                     switch(opcion){
                         case "1":
                             ManejoSmartWatch.getInstancia().mostrarFotoReloj();
-                            break;
-                        case "2":
-                            break;
-                        case"3":
-                    
-                            break;
-                        case"4":
-                
-                            break;
-                        case"5":
-                    
                             break;
                     }
                 }while (!opcion.toLowerCase().equals("salir"));
@@ -420,12 +407,13 @@ public class MenuAcciones {
                             ManejoSmartPhone.getInstancia().mostrarFotoPhone();
                             break;
                         case "2":
+                            ManejoDispositivo.getInstancia().mostrarTextosCopiados();
                             break;
                         case"3":
-                    
+                            ManejoSmartPhone.getInstancia().pegarTextoPhone();
                             break;
                         case"4":
-                
+                            ManejoSmartPhone.getInstancia().compartirDocumentoPhone();
                             break;
                         case"5":
                     

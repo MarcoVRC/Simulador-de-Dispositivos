@@ -6,6 +6,7 @@
 package io;
 
 import bean.Dispositivo;
+import bean.Documento;
 import bean.Foto;
 import bean.Tablet;
 import java.io.BufferedReader;
@@ -66,7 +67,7 @@ public class ManejoTablet extends ManejoDispositivo{
     
     }
     
-    public void capturarFotoTablet()
+    public void mostrarLista()
     {
         for(Tablet d: arrayTablets)
         {
@@ -77,7 +78,12 @@ public class ManejoTablet extends ManejoDispositivo{
             System.out.println("--------------------------------------------------------------------");
             
         }
-         System.out.println("Selecciona el dispositivo tomar una fotografia.: ");
+    }
+    
+    public void capturarFotoTablet()
+    {
+        mostrarLista();
+        System.out.println("Selecciona el dispositivo tomar una fotografia.: ");
         try{
         int id = Integer.parseInt(bf.readLine());
         for(Tablet p: arrayTablets)
@@ -93,15 +99,7 @@ public class ManejoTablet extends ManejoDispositivo{
     
     public void mostrarFotoTablet()
     {
-       for(Tablet d: arrayTablets)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-            
-        }
+        mostrarLista();
         System.out.println("Selecciona el dispositivo para ingresar a su galeria: ");
         try{
         int id = Integer.parseInt(bf.readLine());
@@ -125,15 +123,7 @@ public class ManejoTablet extends ManejoDispositivo{
     
     public void copiarTextoTablet()
      {
-        for(Tablet d: arrayTablets)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-            
-        }
+         mostrarLista();
          System.out.println("Selecciona el dispositivo que va a copiar el texto: ");
         try{
             try{
@@ -152,14 +142,7 @@ public class ManejoTablet extends ManejoDispositivo{
     
     public void pegarTextoTablet()
     {
-        for(Tablet d: arrayTablets)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-        }
+        mostrarLista();
         System.out.println("Selecciona el dispositivo en el que vas pegar el texto: ");
         try{
             try{
@@ -174,6 +157,82 @@ public class ManejoTablet extends ManejoDispositivo{
             }catch(NumberFormatException ex){}
         }catch(IOException e){}
     }
+    
+    public void mostrarListaVisibles()
+    {
+        for(Tablet d: arrayTablets)
+        {
+            if(d.getVisibilidad().equals("SI"))
+            {
+                System.out.println("--------------------------------------------------------------------");
+                System.out.println("ID : " + d.getIdDispositivo()+"\n");
+                System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+                System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+                System.out.println("--------------------------------------------------------------------");
+            }
+        }
+    }
+    
+    public void compartirDocumentoTablet()
+    {
+        try{
+        System.out.println("Escribe el nombre del documento que vas a compartir : ");
+        String nombreDocumento = bf.readLine();
+        
+        mostrarListaVisibles();
+        System.out.println("Selecciona el dispositivo al que se le va a compartir el documento.: ");
+        int idDestino = Integer.parseInt(bf.readLine());
+        
+        System.out.println("Selecciona el dispositivo que va a compartir el documento : ");
+        mostrarListaVisibles();
+        int idOrigen = Integer.parseInt(bf.readLine());
+        
+        for(Tablet p: arrayTablets)
+        {
+            if(idOrigen == p.getIdDispositivo())
+            {
+                for(Tablet p1: arrayTablets)
+                {
+                    if(idDestino == p1.getIdDispositivo())
+                    {
+                        crearDocumento(p.getNombreDelDispositivo(), p1.getNombreDelDispositivo(),
+                                p.getIdDispositivo(), nombreDocumento);
+                    }
+                }
+            }
+        }
+        /*******/
+        }catch(IOException e){}
+        
+    }
+    
+     public void mostrarDocumentosTablet()
+    {
+        mostrarLista();
+        System.out.println("Selecciona el dispositivo para ingresar a sus documentos compartidos : ");
+        try{
+        int id = Integer.parseInt(bf.readLine());
+        for(Tablet p: arrayTablets)
+        {
+            if(p.getIdDispositivo() == id)
+            {
+                for(Documento f: arrayDocumentos)
+                {
+                    if(f.getIdDispositivo() == id )
+                    {
+                        System.out.println("***************************************************************");
+                        System.out.println("Nombre del documento : " + f.getNombreDocumento());
+                        System.out.println("Compartido desde: " + f.getnombreDispositivoOrigen());
+                        System.out.println("Dispositivo Actual : " + f.getNombreDispositivoDestino());
+                        System.out.println("***************************************************************");
+                    }
+                }
+            }
+        }
+        }catch(IOException e){}
+        
+    } 
+     
     public void administrarTablet(){
         Tablet tablet = new Tablet();
        
