@@ -6,6 +6,7 @@
 package io;
 
 import bean.Dispositivo;
+import bean.Documento;
 import bean.Foto;
 import bean.Texto;
 import java.io.BufferedReader;
@@ -22,19 +23,26 @@ public class ManejoDispositivo {
     private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     protected  ArrayList<Foto> arrayFotos = new ArrayList<>();
     protected ArrayList<Texto> arrayTexto = new ArrayList<>();
+    protected ArrayList<Documento> arrayDocumentos = new ArrayList<>();
     private String textoCopiado="";
     protected String encendido="SI";
     private int idFoto=1;
     private int idTexto=1;
+    private int idDocumento=1;
    public ManejoDispositivo()
     {
-       /* if(!arrayFotos.isEmpty())
+        if(!arrayFotos.isEmpty())
         {
-        idFoto = arrayFotos.get(arrayFotos.size()-1).+1;
-        }*/
+        idFoto = arrayFotos.get(arrayFotos.size()-1).getIdFoto()+1;
+        }
+        
         if(!arrayTexto.isEmpty())
         {
         idTexto = arrayTexto.get(arrayTexto.size()-1).getIdTexto()+1;
+        }
+        if(!arrayDocumentos.isEmpty())
+        {
+        idDocumento = arrayDocumentos.get(arrayDocumentos.size()-1).getIdDocumento()+1;
         }
     }
     
@@ -213,11 +221,13 @@ public class ManejoDispositivo {
             {
                 System.out.println("Escribe el nombre de la foto. ");
                 String nombreFoto = bf.readLine();
+                foto.setIdFoto(idFoto);
                 foto.setNombreFoto(nombreFoto);
                 foto.setTipoDispositivo(tipoDispositivo);
                 foto.setNombreDispositivo(nombreDispositivo);
                 foto.setIdDispositivo(id);
                 arrayFotos.add(foto);
+                    idFoto++; 
             }catch(IOException e){}
             
             }else{System.out.println("El dispositivo no esta vinculado con este correo para tomar la Fotografia.");}
@@ -236,19 +246,53 @@ public class ManejoDispositivo {
             texto.setNombreDispositivo(nombreDispositivo);
             texto.setTextoCopiado(textoCopiado);
             arrayTexto.add(texto);
-            idTexto++;
+                idTexto++;
         }catch(IOException e){}
     }
     
-     public void pegarTexto()
-     {
+    public void pegarTexto()
+    {
+        int max = arrayTexto.size();
         for(Texto t: arrayTexto)
         {
+            if(max == t.getIdTexto())
+            {
             System.out.println("Ultimo texto copiado, por el dispositivo es : " + t.getNombreDispositivo() 
                     + " " + t.getTextoCopiado());
+            }
         }
         
-     }
-   
+    }
+    
+    public void mostrarTextosCopiados()
+    {
+        for(Texto t: arrayTexto)
+        {
+            System.out.println(t.getIdDispositivo() + t.getNombreDispositivo() + t.getTextoCopiado());
+        }
+    }
+    
+    
+    public void crearDocumento(String nombreDispositivoOrigen, String nombreDestino, int idDispositivo, String nombre)
+    {
+       Documento documento = new Documento();
+       documento.setIdDocumento(idDocumento);
+       documento.setIdDispositivo(idDispositivo);
+       documento.setNombreDispositivoOrigen(nombreDispositivoOrigen);
+       documento.setNombreDispositivoDestino(nombreDestino);
+       documento.setNombreDocumento(nombre);
+        
+        System.out.println("Deseas recibir el archivo " + nombre +  " que el dispositivo " + nombreDispositivoOrigen 
+                + " te esta enviando a ti ; " + nombreDestino );
+        try{
+        String respuesta = bf.readLine();
+        if(respuesta.toLowerCase().equals("si"))
+        {
+            System.out.println("El archivo se compartio con exito!");
+            arrayDocumentos.add(documento);
+            idDocumento++;
+        }
+        }catch(IOException e){}
+    }
 }
 
