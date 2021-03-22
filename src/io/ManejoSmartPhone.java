@@ -5,6 +5,7 @@
  */
 package io;
 
+import bean.Documento;
 import bean.Foto;
 import bean.SmartPhone;
 import java.io.BufferedReader;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 
 public class ManejoSmartPhone extends ManejoDispositivo{
     private static ManejoSmartPhone instancia;
-    private ArrayList<SmartPhone> arrayTelefonos = new ArrayList<>();
+    protected ArrayList<SmartPhone> arrayTelefonos = new ArrayList<>();
     private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     private int Id=1;
     private ManejoSmartPhone()
@@ -227,16 +228,8 @@ public class ManejoSmartPhone extends ManejoDispositivo{
     
     public void capturarFotoPhone() 
     {
-        for(SmartPhone d: arrayTelefonos)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-            
-        }
-         System.out.println("Selecciona el dispositivo para tomar una fotografia.: ");
+        mostrarLista();
+        System.out.println("Selecciona el dispositivo para tomar una fotografia.: ");
         try{
             try{
         int id = Integer.parseInt(bf.readLine());
@@ -255,15 +248,7 @@ public class ManejoSmartPhone extends ManejoDispositivo{
     
     public void mostrarFotoPhone()
     {
-       for(SmartPhone d: arrayTelefonos)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-            
-        }
+        mostrarLista();
         System.out.println("Selecciona el dispositivo para ingresar a su galeria: ");
         try{
         int id = Integer.parseInt(bf.readLine());
@@ -288,16 +273,8 @@ public class ManejoSmartPhone extends ManejoDispositivo{
     
     public void copiarTextoPhone()
      {
-        for(SmartPhone d: arrayTelefonos)
-        {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("ID : " + d.getIdDispositivo()+"\n");
-            System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
-            System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
-            System.out.println("--------------------------------------------------------------------");
-            
-        }
-         System.out.println("Selecciona el dispositivo que va a copiar el texto: ");
+        mostrarLista();
+        System.out.println("Selecciona el dispositivo que va a copiar el texto: ");
         try{
             try{
         int id = Integer.parseInt(bf.readLine());
@@ -313,8 +290,9 @@ public class ManejoSmartPhone extends ManejoDispositivo{
         }catch(IOException e){}
      }
     
-    public void pegarTextoPhone()
+    public void mostrarLista()
     {
+
         for(SmartPhone d: arrayTelefonos)
         {
             System.out.println("--------------------------------------------------------------------");
@@ -323,6 +301,12 @@ public class ManejoSmartPhone extends ManejoDispositivo{
             System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
             System.out.println("--------------------------------------------------------------------");
         }
+   
+    }
+    
+    public void pegarTextoPhone()
+    {
+        mostrarLista();
         System.out.println("Selecciona el dispositivo en el que vas pegar el texto: ");
         try{
             try{
@@ -337,7 +321,82 @@ public class ManejoSmartPhone extends ManejoDispositivo{
             }catch(NumberFormatException ex){}
         }catch(IOException e){}
     }
-     
+    
+    public void mostrarListaVisibles()
+    {
+        for(SmartPhone d: arrayTelefonos)
+        {
+            if(d.getVisibilidad().equals("SI"))
+            {
+                System.out.println("--------------------------------------------------------------------");
+                System.out.println("ID : " + d.getIdDispositivo()+"\n");
+                System.out.println("CORREO DEL DISPOSITIVO : " + d.getCorreoElectronico()+"\n");
+                System.out.println("NOMBRE DEL DISPOSITIVO : " + d.getNombreDelDispositivo()+"\n");
+                System.out.println("--------------------------------------------------------------------");
+            }
+        }
+    }
+    
+    public void compartirDocumentoPhone()
+    {
+        try{
+        System.out.println("Escribe el nombre del documento que vas a compartir : ");
+        String nombreDocumento = bf.readLine();
+        
+        mostrarListaVisibles();
+        System.out.println("Selecciona el dispositivo al que se le va a compartir el documento.: ");
+        int idDestino = Integer.parseInt(bf.readLine());
+        
+        System.out.println("Selecciona el dispositivo que va a compartir el documento : ");
+        mostrarListaVisibles();
+        int idOrigen = Integer.parseInt(bf.readLine());
+        
+        for(SmartPhone p: arrayTelefonos)
+        {
+            if(idOrigen == p.getIdDispositivo())
+            {
+                for(SmartPhone p1: arrayTelefonos)
+                {
+                    if(idDestino == p1.getIdDispositivo())
+                    {
+                        crearDocumento(p.getNombreDelDispositivo(), p1.getNombreDelDispositivo(),
+                                p.getIdDispositivo(), nombreDocumento);
+                    }
+                }
+            }
+        }
+        /*******/
+        }catch(IOException e){}
+        
+    }
+    
+    public void mostrarDocumentosPhone()
+    {
+        mostrarLista();
+        System.out.println("Selecciona el dispositivo para ingresar a sus documentos compartidos : ");
+        try{
+        int id = Integer.parseInt(bf.readLine());
+        for(SmartPhone p: arrayTelefonos)
+        {
+            if(p.getIdDispositivo() == id)
+            {
+                for(Documento f: arrayDocumentos)
+                {
+                    if(f.getIdDispositivo() == id )
+                    {
+                        System.out.println("***************************************************************");
+                        System.out.println("Nombre del documento : " + f.getNombreDocumento());
+                        System.out.println("Compartido desde: " + f.getnombreDispositivoOrigen());
+                        System.out.println("Dispositivo Actual : " + f.getNombreDispositivoDestino());
+                        System.out.println("***************************************************************");
+                    }
+                }
+            }
+        }
+        }catch(IOException e){}
+        
+    }
+    
     public Boolean verificar(String correo)
     {
         for(SmartPhone s: arrayTelefonos)
